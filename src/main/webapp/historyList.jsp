@@ -35,7 +35,16 @@
 	 }else if('last' == flag){
 		 var last = Number(document.getElementById('last').value);
 		 document.getElementById('page').value = last < 1 ? 1 : last;
-	 }
+	 }else if('pageGo' == flag){
+         var page = document.getElementById('pageGo').value;
+         var last = Number(document.getElementById('last').value);
+         if (page > last) {
+             page = last;
+         }else if (page < 1) {
+             page = 1;
+         }
+         document.getElementById('page').value = page;
+     }
 	 document.getElementById('eForm').submit();
  }
 </script>
@@ -90,6 +99,8 @@
 			<a href="javascript:void(0)" onclick="submitPage('next')">下一页</a>&nbsp;
 			<a href="javascript:void(0)" onclick="submitPage('last')">尾页</a>
 		</c:if>
+        <input type="text" id="pageGo" onkeyup="this.value=this.value.replace(/\D/g,'')"/>
+        <input type="button" onclick="submitPage('pageGo')" value="Go" >
 	</form>
 </body>
 </html>
